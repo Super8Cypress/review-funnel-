@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate Your Experience</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 50px;
+    }
+    .stars {
+      display: inline-flex;
+      font-size: 2em;
+      cursor: pointer;
+    }
+    .star {
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+    .star:hover,
+    .star.hovered,
+    .star.selected {
+      color: gold;
+    }
+    #message {
+      margin-top: 30px;
+      font-size: 1.2em;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>How was your experience?</h1>
+  <div class="stars" id="stars">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+  </div>
+  <div id="message">Thank you for your feedback!</div>
+
+  <script>
+    const stars = document.querySelectorAll('.star');
+    const message = document.getElementById('message');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+      star.addEventListener('mouseover', () => {
+        resetStars();
+        highlightStarsUpTo(star);
+      });
+
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.getAttribute('data-value'));
+        if (selectedRating === 5) {
+          window.location.href = "https://maps.app.goo.gl/tHqt5soEnb8aVxbPA";
+        } else {
+          message.style.display = 'block';
+          resetStars();
+          highlightStarsUpTo(star);
+          star.classList.add('selected');
+        }
+      });
+
+      star.addEventListener('mouseout', () => {
+        resetStars();
+        if (selectedRating > 0) {
+          highlightStarsUpToValue(selectedRating);
+        }
+      });
+    });
+
+    function resetStars() {
+      stars.forEach(star => star.classList.remove('hovered', 'selected'));
+    }
+
+    function highlightStarsUpTo(star) {
+      const value = parseInt(star.getAttribute('data-value'));
+      highlightStarsUpToValue(value);
+    }
+
+    function highlightStarsUpToValue(value) {
+      stars.forEach(star => {
+        if (parseInt(star.getAttribute('data-value')) <= value) {
+          star.classList.add('hovered');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

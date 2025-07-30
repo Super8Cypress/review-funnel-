@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rate Your Experience</title>
   <style>
     body {
@@ -58,7 +57,7 @@
       star.addEventListener('click', () => {
         selectedRating = parseInt(star.getAttribute('data-value'));
         if (selectedRating === 5) {
-          window.location.href = "https://maps.app.goo.gl/tHqt5soEnb8aVxbPA";
+          window.location.href = "https://www.google.com/maps/place/?q=place_id:ChIJg7Qq-w_s3YAROrV6zZZcBSo&review=1";
         } else {
           message.style.display = 'block';
           resetStars();
